@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Copy/paste this job script into a text file and submit with the command:
+#    sbatch thefilename
+# job standard output will go to the file slurm-%j.out (where %j is the job ID)
+
+#SBATCH --time=2:00:00   # walltime limit (HH:MM:SS)
+#SBATCH --nodes=1   # number of nodes
+#SBATCH --ntasks-per-node=16   # 16 processor core(s) per node
+
+# LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
+make -f Makefile_OpenMP clean
+make -f Makefile_OpenMP
+
+./main_openmp.exe  1 >  job_openmp_output.txt
+./main_openmp.exe  2 >> job_openmp_output.txt
+./main_openmp.exe  4 >> job_openmp_output.txt
+./main_openmp.exe  8 >> job_openmp_output.txt
+./main_openmp.exe 16 >> job_openmp_output.txt
+# ./main_openmp.exe 32 >> job_openmp_output.txt

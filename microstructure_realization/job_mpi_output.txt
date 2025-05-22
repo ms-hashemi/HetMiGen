@@ -1,0 +1,7 @@
+Warning: the results directory already exists. No new folder was created.
+
+----------------
+Realization code execution...
+num_threads(): 2
+Realization code finished!
+----------------

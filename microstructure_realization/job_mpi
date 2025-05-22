@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Copy/paste this job script into a text file and submit with the command:
+#    sbatch thefilename
+# job standard output will go to the file slurm-%j.out (where %j is the job ID)
+
+#SBATCH --time=8:00:00   # walltime limit (HH:MM:SS)
+#SBATCH --nodes=16   # number of nodes
+#SBATCH --ntasks-per-node=1   # 1 processor core(s) per node
+
+# LOAD MODULES, INSERT CODE, AND RUN YOUR PROGRAMS HERE
+# module load intel
+make -f Makefile_MPI clean
+make -f Makefile_MPI
+
+mpirun -np  1 ./main_mpi.exe >  job_mpi_output.txt
+mpirun -np  2 ./main_mpi.exe >> job_mpi_output.txt
+mpirun -np  4 ./main_mpi.exe >> job_mpi_output.txt
+mpirun -np  8 ./main_mpi.exe >> job_mpi_output.txt
+mpirun -np 16 ./main_mpi.exe >> job_mpi_output.txt
+# mpirun -np 32 ./main_mpi.exe >> job_mpi_output.txt
